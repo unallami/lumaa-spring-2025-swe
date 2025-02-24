@@ -3,6 +3,8 @@
 **Deadline**: Sunday, Feb 23th 11:59 pm PST
 
 Task Manager Application
+
+Demo-https://drive.google.com/file/d/1Drug5kjQI0_u69fdvgRc3UtZ-ZdFb3a_/view?usp=drive_link
 ========================
 
 This repository contains a Task Management application built with a React (TypeScript) frontend and a Node.js (Express, TypeScript) backend using PostgreSQL as the database.
@@ -171,4 +173,6 @@ In the `/frontend` directory, create a `.env` file with the following:
     Both backend and frontend projects are built with TypeScript for improved type safety.
 
 ### 6\. Salary Expectations
- -  My salary expectation is $0 because I value gaining experience over monetary compensation. However, I am open to and flexible with any compensation package that aligns with the company’s standards.
+ -  I do not have any salary expectation in specific because I value gaining experience over monetary compensation. 
+    However, I am open to any flexible with any compensation package that aligns with the company’s standards and the 
+    current market.

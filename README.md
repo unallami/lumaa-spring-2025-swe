@@ -2,118 +2,173 @@
 
 **Deadline**: Sunday, Feb 23th 11:59 pm PST
 
----
+Task Manager Application
+========================
 
-## Overview
+This repository contains a Task Management application built with a React (TypeScript) frontend and a Node.js (Express, TypeScript) backend using PostgreSQL as the database.
 
-Create a “Task Management” application with **React + TypeScript** (frontend), **Node.js** (or **Nest.js**) (backend), and **PostgreSQL** (database). The application should:
+Features
+--------
 
-1. **Register** (sign up) and **Log in** (sign in) users.
-2. After logging in, allow users to:
-   - **View a list of tasks**.
-   - **Create a new task**.
-   - **Update an existing task** (e.g., mark complete, edit).
-   - **Delete a task**.
+-   **User Authentication:**
 
-Focus on **correctness**, **functionality**, and **code clarity** rather than visual design.  
-This challenge is intended to be completed within ~3 hours, so keep solutions minimal yet functional.
+    -   Registration and login endpoints with secure password hashing (bcrypt)
+    -   JWT-based authentication
+-   **Task Management:**
 
----
+    -   Create, update, view, and delete tasks
+    -   Tasks are tied to the authenticated user
+-   **Frontend UI:**
 
-## Requirements
+    -   Responsive React app with a table view of tasks
+    -   Radio button selection to choose a single task for editing or deletion
+    -   Modal popup for creating and editing tasks
 
-### 1. Authentication
+Project Structure
+-----------------
+```
+lumaa-spring-2025-swe/
+├── backend/         # Node.js + Express + TypeScript backend
+│   ├── src/
+│   │   ├── controllers/
+│   │   │   ├── authController.ts
+│   │   │   └── taskController.ts
+│   │   ├── middleware/
+│   │   │   └── authMiddleware.ts
+│   │   ├── utils/
+│   │   │   └── db.ts
+│   │   └── server.ts
+│   ├── migrations.sql    # SQL migration script for setting up the database tables
+│   ├── .env              # Environment variables for backend (see below)
+│   ├── package.json
+│   └── tsconfig.json
+├── frontend/        # React + TypeScript frontend
+│   ├── src/
+│   │   ├── context/
+│   │   │   └── AuthContext.tsx
+│   │   ├── pages/
+│   │   │   ├── LoginPage.tsx
+│   │   │   ├── RegisterPage.tsx
+│   │   │   └── TasksPage.tsx
+│   │   ├── App.tsx
+│   │   └── index.tsx
+│   ├── .env              # Environment variables for frontend (see below)
+│   ├── package.json
+│   └── tsconfig.json      (if applicable)
+└── README.md
+```
+Setup Instructions
+------------------
 
-- **User Model**:
-  - `id`: Primary key
-  - `username`: Unique string
-  - `password`: Hashed string
-- **Endpoints**:
-  - `POST /auth/register` – Create a new user
-  - `POST /auth/login` – Login user, return a token (e.g., JWT)
-- **Secure the Tasks Routes**: Only authenticated users can perform task operations.  
-  - **Password Hashing**: Use `bcrypt` or another hashing library to store passwords securely.
-  - **Token Verification**: Verify the token (JWT) on each request to protected routes.
+### 1\. Database Setup
 
-### 2. Backend (Node.js or Nest.js)
+#### 1.1 Install PostgreSQL
 
-- **Tasks CRUD**:  
-  - `GET /tasks` – Retrieve a list of tasks (optionally filtered by user).  
-  - `POST /tasks` – Create a new task.  
-  - `PUT /tasks/:id` – Update a task (e.g., mark as complete, edit text).  
-  - `DELETE /tasks/:id` – Delete a task.
-- **Task Model**:
-  - `id`: Primary key
-  - `title`: string
-  - `description`: string (optional)
-  - `isComplete`: boolean (default `false`)
-  - _(Optional)_ `userId` to link tasks to the user who created them
-- **Database**: PostgreSQL
-  - Provide instructions/migrations to set up:
-    - `users` table (with hashed passwords)
-    - `tasks` table
-- **Setup**:
-  - `npm install` to install dependencies
-  - `npm run start` (or `npm run dev`) to run the server
-  - Document any environment variables (e.g., database connection string, JWT secret)
+-   **Windows:**\
+    Download the installer from the [PostgreSQL official website](https://www.postgresql.org/download/windows/) and follow the installation instructions.
 
-### 3. Frontend (React + TypeScript)
+-   **macOS:**
 
-- **Login / Register**:
-  - Simple forms for **Register** and **Login**.
-  - Store JWT (e.g., in `localStorage`) upon successful login.
-  - If not authenticated, the user should not see the tasks page.
-- **Tasks Page**:
-  - Fetch tasks from `GET /tasks` (including auth token in headers).
-  - Display the list of tasks.
-  - Form to create a new task (`POST /tasks`).
-  - Buttons/fields to update a task (`PUT /tasks/:id`).
-  - Button to delete a task (`DELETE /tasks/:id`).
-- **Navigation**:
-  - Show `Login`/`Register` if not authenticated.
-  - Show `Logout` if authenticated.
-- **Setup**:
-  - `npm install` then `npm start` (or `npm run dev`) to run.
-  - Document how to point the frontend at the backend (e.g., `.env` file, base URL).
+    `brew install postgresql
+    brew services start postgresql`
 
----
+-   **Linux:**
 
-## Deliverables
+    `sudo apt update
+    sudo apt install postgresql postgresql-contrib
+    sudo systemctl start postgresql`
 
-1. **Fork the Public Repository**: **Fork** this repo into your own GitHub account.
-2. **Implement Your Solution** in the forked repository. Make sure you're README file has:
-   - Steps to set up the database (migrations, environment variables).
-   - How to run the backend.
-   - How to run the frontend.
-   - Any relevant notes on testing.
-   - Salary Expectations per month (Mandatory)
-3. **Short Video Demo**: Provide a link (in a `.md` file in your forked repo) to a brief screen recording showing:
-   - Registering a user
-   - Logging in
-   - Creating, updating, and deleting tasks
-4. **Deadline**: Submissions are due **Sunday, Feb 23th 11:59 pm PST**.
+#### 1.2 Create the Database
 
-> **Note**: Please keep your solution minimal. The entire project is intended to be completed in around 3 hours. Focus on core features (registration, login, tasks CRUD) rather than polished UI or extra features.
+1.  Open Command Prompt (or terminal) and run:
 
----
+    `psql -U postgres`
 
-## Evaluation Criteria
+    When prompted, enter your PostgreSQL password.
 
-1. **Functionality**  
-   - Does registration and login work correctly (with password hashing)?
-   - Are tasks protected by authentication?
-   - Does the tasks CRUD flow work end-to-end?
+2.  Create the database:
 
-2. **Code Quality**  
-   - Is the code structured logically and typed in TypeScript?
-   - Are variable/function names descriptive?
+    `CREATE DATABASE task_manager_db;`
 
-3. **Clarity**  
-   - Is the `README.md` (in your fork) clear and detailed about setup steps?
-   - Easy to run and test?
+#### 1.3 Run the Migration Script
 
-4. **Maintainability**  
-   - Organized logic (controllers/services, etc.)
-   - Minimal hard-coded values
+A migration file (`migrations.sql`) is provided in the `/backend` directory. It contains SQL commands to create the necessary tables.
 
-Good luck, and we look forward to your submission!
+1.  Open a Command Prompt and navigate to the `/backend` directory.
+2.  Run the migration using:
+
+    `"C:\Program Files\PostgreSQL\17\bin\psql" -U postgres -d task_manager_db -f migrations.sql`
+
+    Adjust the path to `psql` if necessary.
+
+### 2\. Environment Variables
+
+#### 2.1 Backend
+
+In the `/backend` directory, create a `.env` file with the following:
+
+`PORT=5000
+DATABASE_URL=postgresql://postgres:your_password@localhost:5432/task_manager_db
+JWT_SECRET=your_jwt_secret_here`
+
+-   Replace `your_password` with your actual PostgreSQL password.
+-   Replace `your_jwt_secret_here` with a secure secret key for JWT.
+
+#### 2.2 Frontend
+
+In the `/frontend` directory, create a `.env` file with the following:
+
+`REACT_APP_API_URL=http://localhost:5000`
+
+### 3\. Running the Application
+
+#### 3.1 Running the Backend
+
+1.  Open a terminal and navigate to the `/backend` folder.
+2.  Install dependencies:
+
+    `npm install`
+
+3.  Start the backend server:
+
+    `npm run dev`
+
+    The backend will run on <http://localhost:5000>.
+
+#### 3.2 Running the Frontend
+
+1.  Open a terminal and navigate to the `/frontend` folder.
+2.  Install dependencies:
+
+    `npm install`
+
+3.  Start the frontend development server:
+
+    `npm start`
+
+    The frontend will run on <http://localhost:3000>.
+
+### 4\. Testing
+
+-   **Backend Testing:**\
+    Use tools like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/) to test the API endpoints:
+
+    -   **Registration:** POST to `http://localhost:5000/auth/register`
+    -   **Login:** POST to `http://localhost:5000/auth/login`
+    -   **Tasks CRUD:** Test GET, POST, PUT, and DELETE on `http://localhost:5000/tasks` (ensure to pass the JWT in the Authorization header).
+-   **Frontend Testing:**
+
+    -   Register a new user and log in through the UI.
+    -   Test creating, editing, and deleting tasks using the provided modal popup.
+    -   Verify that the tasks table correctly allows single task selection for edit and deletion.
+
+### 5\. Additional Notes
+
+-   **CORS:**\
+    The backend is configured with CORS (using the `cors` middleware) to allow requests from <http://localhost:3000>.
+
+-   **TypeScript:**\
+    Both backend and frontend projects are built with TypeScript for improved type safety.
+
+-   **Deployment Considerations:**\
+    For production, consider adding more robust error handling, security measures, and logging.

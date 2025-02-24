@@ -170,5 +170,4 @@ In the `/frontend` directory, create a `.env` file with the following:
 -   **TypeScript:**\
     Both backend and frontend projects are built with TypeScript for improved type safety.
 
--   **Deployment Considerations:**\
-    For production, consider adding more robust error handling, security measures, and logging.
+

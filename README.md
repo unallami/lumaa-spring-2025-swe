@@ -170,4 +170,5 @@ In the `/frontend` directory, create a `.env` file with the following:
 -   **TypeScript:**\
     Both backend and frontend projects are built with TypeScript for improved type safety.
 
-
+### 6\. Salary Expectations
+ -  My salary expectation is $0 because I value gaining experience over monetary compensation. However, I am open to and flexible with any compensation package that aligns with the company’s standards.

@@ -89,6 +89,7 @@ const TasksPage = () => {
           { title: modalTitle, description: modalDescription, isComplete: modalIsComplete },
           { headers: { Authorization: `Bearer ${token}` } }
         );
+        setSelectedTaskId(null);
         fetchTasks();
         closeModal();
       } catch (error) {
@@ -152,7 +153,7 @@ const TasksPage = () => {
 
     
       <div style={{ marginTop: '20px' }}>
-        <button onClick={openCreateModal} disabled={selectedTaskId !== null}>
+        <button onClick={openCreateModal} >
           Create Task
         </button>
         <button onClick={openEditModal} disabled={selectedTaskId === null}>

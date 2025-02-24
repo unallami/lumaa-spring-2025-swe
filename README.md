@@ -28,7 +28,7 @@ Project Structure
 -----------------
 ```
 lumaa-spring-2025-swe/
-├── backend/         # Node.js + Express + TypeScript backend
+├── backend/         
 │   ├── src/
 │   │   ├── controllers/
 │   │   │   ├── authController.ts
@@ -38,11 +38,11 @@ lumaa-spring-2025-swe/
 │   │   ├── utils/
 │   │   │   └── db.ts
 │   │   └── server.ts
-│   ├── migrations.sql    # SQL migration script for setting up the database tables
-│   ├── .env              # Environment variables for backend (see below)
+│   ├── migrations.sql    
+│   ├── .env              
 │   ├── package.json
 │   └── tsconfig.json
-├── frontend/        # React + TypeScript frontend
+├── frontend/        
 │   ├── src/
 │   │   ├── context/
 │   │   │   └── AuthContext.tsx
@@ -52,9 +52,9 @@ lumaa-spring-2025-swe/
 │   │   │   └── TasksPage.tsx
 │   │   ├── App.tsx
 │   │   └── index.tsx
-│   ├── .env              # Environment variables for frontend (see below)
+│   ├── .env              
 │   ├── package.json
-│   └── tsconfig.json      (if applicable)
+│   └── tsconfig.json      
 └── README.md
 ```
 Setup Instructions
